@@ -16,29 +16,29 @@
 import tinymce from 'tinymce/tinymce'
 import Editor from '@tinymce/tinymce-vue'
 import axios from 'axios'
-import './tinymce/themes/silver'
-import './tinymce/plugins/image' // 插入上传图片插件
-import './tinymce/plugins/media' // 插入视频插件
-import './tinymce/plugins/table' // 插入表格插件
-import './tinymce/plugins/lists' // 列表插件
-import './tinymce/plugins/wordcount' // 字数统计插件
-import './tinymce/plugins/autolink'
-import './tinymce/plugins/link'
-import './tinymce/plugins/charmap'
-import './tinymce/plugins/print'
-import './tinymce/plugins/preview'
-import './tinymce/plugins/anchor'
-import './tinymce/plugins/searchreplace'
-import './tinymce/plugins/visualblocks'
-import './tinymce/plugins/advlist'
-import './tinymce/plugins/code'
-import './tinymce/plugins/fullscreen'
-import './tinymce/plugins/insertdatetime'
-import './tinymce/plugins/paste'
-import './tinymce/plugins/imagetools'
-import './tinymce/plugins/autoresize'
+import 'tinymce/themes/silver'
+import 'tinymce/plugins/image' // 插入上传图片插件
+import 'tinymce/plugins/media' // 插入视频插件
+import 'tinymce/plugins/table' // 插入表格插件
+import 'tinymce/plugins/lists' // 列表插件
+import 'tinymce/plugins/wordcount' // 字数统计插件
+import 'tinymce/plugins/autolink'
+import 'tinymce/plugins/link'
+import 'tinymce/plugins/charmap'
+import 'tinymce/plugins/print'
+import 'tinymce/plugins/preview'
+import 'tinymce/plugins/anchor'
+import 'tinymce/plugins/searchreplace'
+import 'tinymce/plugins/visualblocks'
+import 'tinymce/plugins/advlist'
+import 'tinymce/plugins/code'
+import 'tinymce/plugins/fullscreen'
+import 'tinymce/plugins/insertdatetime'
+import 'tinymce/plugins/paste'
+import 'tinymce/plugins/imagetools'
+import 'tinymce/plugins/autoresize'
 
-import './tinymce/plugins/lineheight'
+// import 'tinymce/plugins/lineheight'
 export default {
   components: {
     Editor
@@ -64,9 +64,13 @@ export default {
       type: Boolean,
       default: false
     },
+    uploadUrl: {
+      type: String,
+      default: process.env.VUE_APP_UPLOAD_URL
+    },
     plugins: {
       type: [String, Array],
-      default: function() {
+      default: function () {
         return [
           'advlist autolink lists link image  charmap print preview anchor',
           'searchreplace visualblocks code fullscreen',
@@ -88,7 +92,6 @@ export default {
     return {
       uploading: false,
       uploadPercent: 0,
-      uploadUrl: process.env.UPLOAD_URL,
       contentData: '',
       editorInit: {
         // GLOBAL
@@ -120,21 +123,23 @@ export default {
           Webdings=webdings;
           Wingdings=wingdings,zapf dingbats;
          `,
-        content_css:
-          './tinymce/skins/content/default/content.css',
-        skin_url: './tinymce/skins/ui/oxide',
+        base_url: `${process.env.BASE_URL}tinymce_tools`,
+        // content_css:
+        //   '/tinymce_tools/skins/content/default/content.css',
+        // skin_url: '/tinymce_tools/skins/ui/oxide',
         skin: 'oxide',
         width: this.width,
         height: this.height,
         // menubar: false,
         language: 'zh_CN',
-        language_url: './tinymce/langs/zh_CN.js',
+        // language_url: '/tinymce_tools/langs/zh_CN.js',
         // statusbar: false,
         toolbar: this.toolbar,
         plugins: this.plugins,
         external_plugins: {
           powerpaste:
-            './tinymce/plugins/powerpaste/plugin.min.js'
+            `${process.env.BASE_URL}tinymce_tools/plugins/powerpaste/plugin.min.js`,
+          lineheight: `${process.env.BASE_URL}tinymce_tools/plugins/lineheight/plugin.min.js`
         },
         min_height: 500,
         imagetools_cors_hosts: ['58.16.65.111'],
@@ -147,7 +152,7 @@ export default {
           const input = document.createElement('input')
           input.setAttribute('type', 'file')
           const vm = this
-          input.onchange = function() {
+          input.onchange = function () {
             document
               .getElementsByClassName('tox-control-wrap')[0]
               .appendChild(document.getElementById('progress'))
@@ -286,6 +291,7 @@ export default {
         images_upload_handler: (blobInfo, success, failure) => {
           const formData = new FormData()
           formData.append('file', blobInfo.blob(), blobInfo.filename())
+          console.log('upload', this.uploadUrl)
           axios(this.uploadUrl, {
             method: 'post',
             data: formData,
