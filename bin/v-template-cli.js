@@ -1,6 +1,8 @@
+#!/usr/bin/env node
 const chalk = require('chalk');
 const clear = require('clear');
 const figlet = require('figlet');
+const ora = require('ora');
 const fs = require('fs-extra')
 const program = require('commander')
 var svn = require('node-svn-ultimate');
@@ -16,7 +18,7 @@ clear();
 
 console.log(
   chalk.yellow(
-    figlet.textSync('Vue-Template-Cli', { horizontalLayout: 'full' })
+    figlet.textSync('V-Template-Cli', { horizontalLayout: 'full' })
   )
 );
 const notifier = updateNotifier({
@@ -46,7 +48,6 @@ program
 						message: `Target directory ${chalk.cyan(path)} already exists. Pick an action:`,
 						choices: [
 							{ name: 'Overwrite', value: 'overwrite' },
-							{ name: 'Merge', value: 'merge' },
 							{ name: 'Cancel', value: false }
 						]
 					}
@@ -54,16 +55,27 @@ program
 					if (!answer) {
 						return
 					} else if (answer.action === 'overwrite') {
-						console.log(`\nRemoving ${chalk.cyan(path)}...`)
+						const spinner = ora(`Removing ${chalk.cyan(path)}...`).start();
 						fs.remove(path).then(async () => {
-							console.log('deletes');
-							clear()
-							const creator = new Creator(path)
+							spinner.succeed(`Remove ${chalk.cyan(path)} success`);
+							// const creator = new Creator(path)
+							// creator.create()
+							const {choose} =  await inquirer.prompt([{
+								type: 'list',
+								message: 'Which template do you want to create?',
+								name: 'choose',
+								choices: [
+									{ name: 'visual template', value: 'vi' },
+									{ name: 'backstage template', value: 'sever' },
+									{ name: 'Cancel', value: false }
+								],
+							}])
+							const creator = new Creator(path,choose)
 							creator.create()
 						}).catch(err => {
+							spinner.fail(`\nRemove ${chalk.cyan(path)} failed`,err);
 							if (err) {  console.error(err) }
 							})
-						
 						
 						
 						
@@ -71,53 +83,25 @@ program
 						return;
 					}
 					
+				}).catch(err => {
+					console.log('err',err);
 				})
 			
 			} else {
-				const creator = new Creator(path)
-				return creator.create()
+				const {choose} =  await inquirer.prompt([{
+					type: 'list',
+					message: 'Which template do you want to create?',
+					name: 'choose',
+					choices: [
+						{ name: 'visual template', value: 'vi' },
+						{ name: 'backstage template', value: 'sever' },
+						{ name: 'Cancel', value: false }
+					],
+				}])
+				const creator = new Creator(path,choose)
+				creator.create()
 			}
 		})
-	
-		// inquirer.registerPrompt('selectLine', require('inquirer-select-line'));
-		// inquirer.prompt([{
-		// 	type: 'list',
-		// 	message: 'Which template do you want to create?',
-		// 	name: 'template',
-		// 	choices: ['visualization', 'second', 'third', 'fourth'],
-		// }]).then((answers) => {
-		
-		// 	var pwd = shell.pwd()
-		// 	console.log('object',answers.template, project);
-		// 	switch (answers.template) {
-				
-		// 		case 'visualization':
-		// 			log.info('模板工程建立。。')
-		// 			svn.commands.checkout(`https://github.com/lyhmyd1211/v-template-cli/trunk/pacages/vue-admin-template`, pwd + `\\${project}`,  (err)=> {
-		// 				shell.rm('-rf', pwd + `\\${project}\\.svn`)
-		// 				console.log('rf',pwd + `\\${project}\\.svn`,err);
-		// 				log.info('模板工程建立完成')
-		// 			})
-		// 			// clone(`https://github.com/lyhmyd1211/v-template-cli/pacages/vue-admin-template`, pwd + `/${project}`, null, function() {
-		// 			// 	shell.rm('-rf', pwd + `/${project}/.git`)
-					
-		// 			// 	log.info('模板工程建立完成')
-		// 			// })
-		// 			break;
-			
-		// 		default:
-		// 			// console.log('and', answers.template);
-		// 			// clone(`https://github.com/lyhmyd1211/v-template-cli/pacages/vue-admin-template`, pwd + `/${project}`, null, function() {
-		// 			// 	shell.rm('-rf', pwd + `/${project}/.git`)
-		// 			// 	log.info('模板工程建立完成')
-		// 			// })
-		// 			break;
-		// 	}
-				/*
-				OUTPUT :
-				Chosen line: 2
-				*/
-		// });
     
     })
 program.parse(process.argv)
