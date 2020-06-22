@@ -1,14 +1,22 @@
 {
   "name": "v-template-cli",
-  "version": "1.0.0",
-  "description": "",
+  "version": "0.0.1",
+  "description": "A cli tool for generating Vue templates",
   "main": "index.js",
   "bin": {
     "vt": "bin/v-template-cli.js"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "compile": "npx babel lib bin --copy-files --source-maps --extensions .es6,.es,.jsx --out-dir dist"
   },
+  "keywords": [
+    "vue",
+    "vue-template-admin",
+    "vue-cli",
+    "h5 template",
+    "admin template"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/lyhmyd1211/v-template-cli.git"
@@ -34,5 +42,12 @@
     "shelljs": "^0.8.4",
     "tracer": "^1.1.2",
     "update-notifier": "^4.1.0"
+  },
+  "engines": {
+    "node": ">= 10.0.0",
+    "npm": ">= 5.6.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0"
   }
 }
