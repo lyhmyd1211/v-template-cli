@@ -5,7 +5,6 @@ const figlet = require('figlet');
 const ora = require('ora');
 const fs = require('fs-extra')
 const program = require('commander')
-var svn = require('node-svn-ultimate');
 // const git = require('git-clone')
 const updateNotifier = require('update-notifier')
 const pkg = require('./../package.json')

@@ -1,27 +1,27 @@
 # v-template-cli
 
-English | [简体中文](./README-zh.md)
+简体中文 | [English](./README.md)
 
-Cli tool for automatically pulling vue project templates
+自动拉取 vue 项目模板的 cli 工具。
 
-Include：
+包括：
 
-- [vue-admin-template](https://github.com/lyhmyd1211/v-templates/tree/admin)：Based on [vue-admin-template](https://github.com/PanJiaChen/vue-admin-template) backend management system template, and adds commonly used tool functions and some packaging and compatibility modifications to element-ui components.
+- [vue-admin-template](https://github.com/lyhmyd1211/v-templates/tree/admin)：基于[vue-admin-template](https://github.com/PanJiaChen/vue-admin-template)的中后台管理系统模板，并添加了常用的工具函数以及一些对 element-ui 组件的封装和兼容性修改。
 
-* [vue-app-template](https://github.com/lyhmyd1211/v-templates/tree/app)：Lightweight WebApp template. Use [vant](https://youzan.github.io/vant/#/) as the basic ui component library, and use [lib-flexible](https://github.com/amfe/lib-flexible/) Rem adaptation with [postcss-pxtorem](https://github.com/cuth/postcss-pxtorem).
+* [vue-app-template](https://github.com/lyhmyd1211/v-templates/tree/app)：轻量级 WebApp 模板。使用[vant](https://youzan.github.io/vant/#/)作为基础的 ui 组件库，并使用[lib-flexible](https://github.com/amfe/lib-flexible/)和[postcss-pxtorem](https://github.com/cuth/postcss-pxtorem)进行 Rem 适配。
 
-- [vue-visual-template](https://github.com/lyhmyd1211/v-templates/tree/visual)：Visualize large-screen project templates. Simple vue component packaging for Echarts; preset [jiaminghi's DataV (a vue large-screen data display component library)](http://datav.jiaminghi.com/) (not Alibaba Cloud's data visualization solution, visible access The importance of the name), and dealt with its compatibility on ie; added full-screen components and adaptive wrapper components.
+- [vue-visual-template](https://github.com/lyhmyd1211/v-templates/tree/visual)：可视化大屏项目模板。对 Echarts 进行简单的 vue 组件封装；预置了[jiaminghi 的 DataV（一个 vue 大屏数据展示组件库）](http://datav.jiaminghi.com/)（不是阿里云的数据可视化方案，可见取名的重要性），并对其在 ie 上的兼容性做了处理；添加了全屏组件以及自适应 wrapper 组件。
 
-## Environmental dependence
+## 环境依赖
 
 ```
 "node": ">= 10.0.0",
 "npm": ">= 5.6.0"
 
-"Other versions are not tested yet"
+"其他版本暂未测试"
 ```
 
-## install
+## 安装
 
 ```
 npm i v-template-cli -g
@@ -33,37 +33,36 @@ or
 yarn global add v-template-cli
 ```
 
-## use
+## 使用
 
-### create a project
+### 创建一个项目
 
 #### vt create
 
-To create a new project, run:
+通过运行以下命令创建一个项目:
 
 ```
 vt create hello-world
 ```
 
-Choose the template you want to pull：
+选择你想要拉取的模板：
 
-![Choose the template you want to pull](https://github.com/lyhmyd1211/pictures/blob/master/cli1.png?raw=true)
+![选择你想要拉取的模板](https://github.com/lyhmyd1211/pictures/blob/master/cli1.png?raw=true)
 
-Choose whether to install dependencies immediately：
+选择是否立即安装依赖：
 
-![Choose whether to install dependencies immediately](https://github.com/lyhmyd1211/pictures/blob/master/cli2.png?raw=true)
+![选择是否立即安装依赖](https://github.com/lyhmyd1211/pictures/blob/master/cli2.png?raw=true)
 
-After the installation is complete, enter the directory and start the project：
+安装完成进入目录并启动项目：
 
-![After the installation is complete, enter the directory and start the project](https://github.com/lyhmyd1211/pictures/blob/master/cli3.png?raw=true)
+![安装完成进入目录并启动项目](https://github.com/lyhmyd1211/pictures/blob/master/cli3.png?raw=true)
 
-When the file name is repeated and you want to create the template again, you can choose whether to overwrite the original folder：
+当文件名重复想再次创建模板时，可以选择是否覆盖原来的文件夹：
+![选择是否覆盖原来的文件夹](https://github.com/lyhmyd1211/pictures/blob/master/cli4.png?raw=true)
 
-![Choose whether to overwrite the original folder](https://github.com/lyhmyd1211/pictures/blob/master/cli4.png?raw=true)
+## 浏览器支持
 
-## Browsers support
-
-Modern browsers and Internet Explorer 10+.
+现代浏览器以及 10+.
 
 | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/edge/edge_48x48.png" alt="IE / Edge" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>IE / Edge | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png" alt="Firefox" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Firefox | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png" alt="Chrome" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Chrome | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/safari/safari_48x48.png" alt="Safari" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Safari |
 | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
