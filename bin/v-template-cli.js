@@ -16,6 +16,19 @@ const log = require('tracer').colorConsole()
 const Creator = require('../lib/create')
 clear();
 
+const listPrompt = [{
+	type: 'list',
+	message: 'Which template do you want to create?',
+	name: 'choose',
+	choices: [
+		{ name: 'vue-visual-template', value: 'visual' },
+		{ name: 'vue-admin-template', value: 'admin' },
+		{ name: 'vue-app-template', value: 'app' },
+		{ name: 'Cancel', value: false }
+	],
+}]
+
+
 console.log(
   chalk.green(
     figlet.textSync('V-Template-Cli', { horizontalLayout: 'full' })
@@ -60,17 +73,7 @@ program
 							spinner.succeed(`Remove ${chalk.cyan(path)} success`);
 							// const creator = new Creator(path)
 							// creator.create()
-							const {choose} =  await inquirer.prompt([{
-								type: 'list',
-								message: 'Which template do you want to create?',
-								name: 'choose',
-								choices: [
-									{ name: 'visual template', value: 'visual' },
-									{ name: 'backstage template', value: 'admin' },
-									{ name: 'h5 template', value: 'app' },
-									{ name: 'Cancel', value: false }
-								],
-							}])
+							const {choose} =  await inquirer.prompt(listPrompt)
 							if (choose) {
 								const creator = new Creator(path,choose)
 								creator.create()
@@ -95,17 +98,7 @@ program
 				})
 			
 			} else {
-				const {choose} =  await inquirer.prompt([{
-					type: 'list',
-					message: 'Which template do you want to create?',
-					name: 'choose',
-					choices: [
-						{ name: 'visual template', value: 'visual' },
-						{ name: 'backstage template', value: 'admin' },
-						{ name: 'h5 template', value: 'app' },
-						{ name: 'Cancel', value: false }
-					],
-				}])
+				const {choose} =  await inquirer.prompt(listPrompt)
 				if (choose) {
 					const creator = new Creator(path,choose)
 					creator.create()
