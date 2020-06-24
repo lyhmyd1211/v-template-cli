@@ -43,7 +43,7 @@ if (notifier.update) {
   log(`有可更新版本: ${notifier.update.latest},建议更新后使用`)
 }
 program
-    .version('0.0.1')
+    .version('0.0.2')
     .description('构建vue中后台、可视化、h5模板工程的cli')
 program
 	.command('create  <project>')
